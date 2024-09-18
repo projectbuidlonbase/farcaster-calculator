@@ -10,15 +10,15 @@ export default function Home() {
       <h2 className="text-2xl font-semibold mb-2">How to Use</h2>
       <ol className="list-decimal list-inside mb-4">
         <li>Add this action to your Farcaster client</li>
-        <li>When prompted, enter two numbers separated by a comma (e.g., "10,5")</li>
+        <li>When prompted, enter two numbers separated by a comma (e.g., &quot;10,5&quot;)</li>
         <li>Choose an operation: + (add), - (subtract), * (multiply), or / (divide)</li>
         <li>View the result in your Farcaster client</li>
       </ol>
       <p className="mb-4">
-        That's it! Enjoy quick calculations without leaving your Farcaster feed.
+        That&apos;s it! Enjoy quick calculations without leaving your Farcaster feed.
       </p>
       <p className="text-sm text-gray-600">
-        Note: This action is designed to work within Farcaster clients and doesn't provide 
+        Note: This action is designed to work within Farcaster clients and doesn&apos;t provide 
         interactive features on this webpage.
       </p>
     </div>
