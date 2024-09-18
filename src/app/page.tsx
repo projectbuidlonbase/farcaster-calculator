@@ -1,54 +1,26 @@
-"use client"
-import { useState } from 'react';
+import React from 'react';
 
 export default function Home() {
-  const [num1, setNum1] = useState<number>(0);
-  const [num2, setNum2] = useState<number>(0);
-  const [operation, setOperation] = useState<'add' | 'subtract' | 'multiply' | 'divide'>('add');
-  const [result, setResult] = useState<number | null>(null);
-
-  const calculate = async () => {
-    const res = await fetch('/api/calculate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ num1, num2, operation }),
-    });
-
-    const data: { result: number } = await res.json();
-    setResult(data.result);
-  };
-
   return (
-    <div>
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-      <div className="col-span-4 flex justify-center">
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
-      <div className="row">
-<label>Enter First Number</label>
-<div className="">
-<input type="number" className="border-2 border-black rounded" onChange={e => setNum1(Number(e.target.value))} />
-</div>
-</div>
-<div className="row">
-<label>Enter Second Number</label>
-<div className="">
-<input type="number" className="border-2 border-black rounded" onChange={e => setNum2(Number(e.target.value))} />
-</div>
-</div>
-<div className="row">
-<label>Select Operation</label>
-<select onChange={e => setOperation(e.target.value as 'add' | 'subtract' | 'multiply' | 'divide')}>
-        <option value="add">+</option>
-        <option value="subtract">-</option>
-        <option value="multiply">*</option>
-        <option value="divide">/</option>
-      </select>
-</div>
-      <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={calculate}>Calculate</button>
-      {result !== null && <div>Result: {result}</div>}
-    </form>  
-    </div>
-    </div>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-4">Farcaster Calculator Action</h1>
+      <p className="mb-4">
+        Welcome to the Farcaster Calculator Action! This action allows you to perform basic arithmetic operations right within your Farcaster client.
+      </p>
+      <h2 className="text-2xl font-semibold mb-2">How to Use</h2>
+      <ol className="list-decimal list-inside mb-4">
+        <li>Add this action to your Farcaster client</li>
+        <li>When prompted, enter two numbers separated by a comma (e.g., &quot;10,5&quot;)</li>
+        <li>Choose an operation: + (add), - (subtract), * (multiply), or / (divide)</li>
+        <li>View the result in your Farcaster client</li>
+      </ol>
+      <p className="mb-4">
+        That&apos;s it! Enjoy quick calculations without leaving your Farcaster feed.
+      </p>
+      <p className="text-sm text-gray-600">
+        Note: This action is designed to work within Farcaster clients and doesn&apos;t provide 
+        interactive features on this webpage.
+      </p>
     </div>
   );
 }
