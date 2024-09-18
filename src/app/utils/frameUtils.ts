@@ -4,7 +4,7 @@ export function getFrameHtmlResponse(result: string): string {
       <html>
         <head>
           <meta property="fc:frame" content="vNext" />
-          <meta property="fc:frame:image" content="https://https://farcaster-calculator.vercel.app/calculator.png" />
+          <meta property="fc:frame:image" content="https://farcaster-calculator.vercel.app/calculator.png" />
           <meta property="fc:frame:button:1" content="+" />
           <meta property="fc:frame:button:2" content="-" />
           <meta property="fc:frame:button:3" content="*" />
@@ -18,4 +18,4 @@ export function getFrameHtmlResponse(result: string): string {
         </body>
       </html>
     `;
-  }
+}
