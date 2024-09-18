@@ -22,15 +22,18 @@ export default function Home() {
     <div>
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
       <div className="col-span-4 flex justify-center">
-      <h1>Farcaster Calculator</h1>
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
       <div className="row">
 <label>Enter First Number</label>
-<input type="number" onChange={e => setNum1(Number(e.target.value))} />
+<div className="">
+<input type="number" className="border-2 border-black rounded" onChange={e => setNum1(Number(e.target.value))} />
+</div>
 </div>
 <div className="row">
-<label>Enter Second Number Number</label>
-<input type="number" onChange={e => setNum2(Number(e.target.value))} />
+<label>Enter Second Number</label>
+<div className="">
+<input type="number" className="border-2 border-black rounded" onChange={e => setNum2(Number(e.target.value))} />
+</div>
 </div>
 <div className="row">
 <label>Select Operation</label>
@@ -41,7 +44,7 @@ export default function Home() {
         <option value="divide">/</option>
       </select>
 </div>
-      <button onClick={calculate}>Calculate</button>
+      <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={calculate}>Calculate</button>
       {result !== null && <div>Result: {result}</div>}
     </form>  
     </div>
