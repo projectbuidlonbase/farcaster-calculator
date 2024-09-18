@@ -1,18 +1,40 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getFrameHtmlResponse } from '@/app/utils/frameUtils';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { num1, num2, operation } = body;
 
-  let result: number | string;
+  // TODO: Implement proper signature validation
+  // For now, we'll assume the request is valid
 
-  switch (operation) {
-    case 'add': result = num1 + num2; break;
-    case 'subtract': result = num1 - num2; break;
-    case 'multiply': result = num1 * num2; break;
-    case 'divide': result = num2 !== 0 ? num1 / num2 : 'Cannot divide by zero'; break;
-    default: result = 'Invalid operation';
+  const { buttonIndex, inputText } = body;
+
+  let result = '';
+  let operation = '';
+
+  if (buttonIndex === 1) operation = '+';
+  else if (buttonIndex === 2) operation = '-';
+  else if (buttonIndex === 3) operation = '*';
+  else if (buttonIndex === 4) operation = '/';
+
+  if (operation && inputText) {
+    const [num1, num2] = inputText.split(',').map(Number);
+    if (!isNaN(num1) && !isNaN(num2)) {
+      switch (operation) {
+        case '+': result = `${num1 + num2}`; break;
+        case '-': result = `${num1 - num2}`; break;
+        case '*': result = `${num1 * num2}`; break;
+        case '/': result = num2 !== 0 ? `${num1 / num2}` : 'Error: Division by zero'; break;
+      }
+    } else {
+      result = 'Error: Invalid input';
+    }
   }
 
-  return NextResponse.json({ result });
+  const html = getFrameHtmlResponse(result);
+
+  return new NextResponse(html, {
+    status: 200,
+    headers: { 'Content-Type': 'text/html' },
+  });
 }
