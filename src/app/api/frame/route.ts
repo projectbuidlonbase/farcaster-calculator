@@ -11,8 +11,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     return new NextResponse('Invalid request', { status: 400 });
   }
 
-  const { untrustedData } = body;
-
   // Default response (initial state and "Calculate Again" state)
   return new NextResponse(
     getFrameHtmlResponse({
