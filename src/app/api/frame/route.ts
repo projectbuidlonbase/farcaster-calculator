@@ -4,9 +4,10 @@ import { NEXT_PUBLIC_URL } from '../../config';
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   console.log('POST /api/frame called');
-  let body;
+  
+  // Remove the body variable since it's not used
   try {
-    body = await req.json();
+    await req.json(); // You can keep this if you want to validate the request body
   } catch (error) {
     return new NextResponse('Invalid request', { status: 400 });
   }
