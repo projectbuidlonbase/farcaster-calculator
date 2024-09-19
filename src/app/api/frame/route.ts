@@ -12,7 +12,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   }
 
   const { untrustedData } = body;
-  const { buttonIndex } = untrustedData;
 
   // Default response (initial state and "Calculate Again" state)
   return new NextResponse(
