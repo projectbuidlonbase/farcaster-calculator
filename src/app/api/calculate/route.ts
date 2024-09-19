@@ -83,6 +83,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       image: `${NEXT_PUBLIC_URL}/api/og?result=${encodeURIComponent(result)}`,
       post_url: `${NEXT_PUBLIC_URL}/api/frame`,
     });
+    console.log('HTML Response:', html);
     return new NextResponse(html, {
       status: 200,
       headers: { 'Content-Type': 'text/html' },
