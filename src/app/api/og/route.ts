@@ -11,30 +11,36 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     return new NextResponse('Result parameter is required', { status: 400 });
   }
 
+  // Paths for local resources
   const imagePath = path.join(process.cwd(), 'public', 'result-background.png');
   const fontPath = path.join(process.cwd(), 'public', 'fonts', 'Arial.ttf');
 
   try {
     // Ensure the font file exists
     if (!fs.existsSync(fontPath)) {
-      throw new Error('Font file not found');
+      throw new Error(`Font file not found at: ${fontPath}`);
     }
 
+    console.log('Font file exists, proceeding with image generation...');
+
+    // Create an SVG buffer with the result text
+    const svgBuffer = Buffer.from(`
+      <svg width="600" height="400">
+        <style>
+          @font-face {
+            font-family: 'Arial';
+            src: url('data:font/ttf;base64,${fs.readFileSync(fontPath).toString('base64')}') format('truetype');
+          }
+          .text { font-family: 'Arial'; font-size: 48px; fill: black; }
+        </style>
+        <text x="50" y="200" class="text">Result: ${decodeURIComponent(result)}</text>
+      </svg>
+    `);
+
+    // Use sharp to overlay the SVG text on the background image
     const image = await sharp(imagePath)
       .resize(600, 400)
-      .composite([
-        {
-          input: {
-            text: {
-              text: `Result: ${decodeURIComponent(result)}`,
-              font: fontPath,
-              rgba: true,
-            },
-          },
-          top: 175,
-          left: 50,
-        },
-      ])
+      .composite([{ input: svgBuffer, top: 0, left: 0 }])
       .png()
       .toBuffer();
 
