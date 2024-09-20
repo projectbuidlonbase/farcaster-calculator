@@ -14,14 +14,13 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   
   try {
     const image = await sharp(imagePath)
-      .resize(600, 400) // Adjust size as needed
+      .resize(600, 400)
       .composite([
         {
           input: {
             text: {
-              text: `Result: ${result}`,
+              text: `Result: ${decodeURIComponent(result)}`,
               font: 'sans-serif',
-              // size: 40, // Removed this line
               rgba: true,
             },
           },
