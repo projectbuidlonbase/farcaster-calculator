@@ -14,7 +14,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   
   try {
     const image = await sharp(imagePath)
-      .resize(600, 400)
+      .resize(600, 400) // Adjust size as needed
       .composite([
         {
           input: {
