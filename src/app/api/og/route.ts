@@ -26,7 +26,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         {
           input: {
             text: {
-              text: `${decodeURIComponent(result)}`, // Removed 'Result: '
+              text: `Result: ${decodeURIComponent(result)}`,
               font: fontPath,
               rgba: true,
             },
@@ -35,7 +35,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
           left: 50,
         },
       ])
-      .png({ compressionLevel: 9 }) // Specify compression level
+      .png()
       .toBuffer();
 
     return new NextResponse(image, {
