@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import sharp from 'sharp';
 import path from 'path';
+import fs from 'fs';
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
   const searchParams = req.nextUrl.searchParams;
@@ -11,16 +12,22 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   }
 
   const imagePath = path.join(process.cwd(), 'public', 'result-background.png');
-  
+  const fontPath = path.join(process.cwd(), 'public', 'fonts', 'Arial.ttf');
+
   try {
+    // Ensure the font file exists
+    if (!fs.existsSync(fontPath)) {
+      throw new Error('Font file not found');
+    }
+
     const image = await sharp(imagePath)
-      .resize(600, 400) // Adjust size as needed
+      .resize(600, 400)
       .composite([
         {
           input: {
             text: {
               text: `Result: ${decodeURIComponent(result)}`,
-              font: 'sans-serif',
+              font: fontPath,
               rgba: true,
             },
           },
