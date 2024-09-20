@@ -49,7 +49,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         image: `${NEXT_PUBLIC_URL}/input.png`,
         post_url: `${NEXT_PUBLIC_URL}/api/calculate`,
         input: {
-          text: `Enter two numbers separated by a comma for ${operation} (e.g., 10,5)`,
+          text: `Enter numbers for ${operation} (e.g. 10,5)`,
         },
       })
     );
