@@ -12,11 +12,18 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   }
 
   const imagePath = path.join(process.cwd(), 'public', 'result-background.png');
-  const fontPath = path.join(process.cwd(), 'public', 'fonts', 'Arial.ttf');
+  const fontPath = path.join(process.cwd(), 'public', 'fonts', 'Roboto-Regular.ttf');
 
   try {
+    // Ensure the image file exists
+    if (!fs.existsSync(imagePath)) {
+      console.error('Background image not found:', imagePath);
+      throw new Error('Background image not found');
+    }
+
     // Ensure the font file exists
     if (!fs.existsSync(fontPath)) {
+      console.error('Font file not found:', fontPath);
       throw new Error('Font file not found');
     }
 
@@ -47,6 +54,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     });
   } catch (error) {
     console.error('Error generating image:', error);
+    // Return a fallback image or an error message
     return new NextResponse('Error generating image', { status: 500 });
   }
 }
